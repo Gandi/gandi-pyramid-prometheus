@@ -1,0 +1,16 @@
+*.pyc
+*.egg-info
+*.project
+*.pydevproject
+*.swp
+*.db
+*.mo
+.noseids
+.settings
+.idea
+.vscode
+docs/_build
+dist/*
+build/*
+venv*
+*.sw[o|p]
