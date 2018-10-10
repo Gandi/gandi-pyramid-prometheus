@@ -26,6 +26,6 @@ class TestCase(unittest.TestCase):
             REGISTRY.unregister(prom.pyramid_request)
             prom.pyramid_request = None
 
-        if prom.pyramid_request_inprocess:
-            REGISTRY.unregister(prom.pyramid_request_inprocess)
-            prom.pyramid_request_inprocess = None
+        if prom.pyramid_request_ingress:
+            REGISTRY.unregister(prom.pyramid_request_ingress)
+            prom.pyramid_request_ingress = None

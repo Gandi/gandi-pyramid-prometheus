@@ -21,7 +21,7 @@ requires = [
 
 extras_require = {
     'doc': [],   # TODO
-    'test': [],  # TODO
+    'test': ['webtest'],
 }
 
 setup(name=name,

@@ -11,12 +11,12 @@ from pyramid.settings import asbool
 IS_MULTIPROC = False
 
 pyramid_request = None
-pyramid_request_inprocess = None
+pyramid_request_ingress = None
 
 
 def includeme(config):
 
-    global IS_MULTIPROC, pyramid_request, pyramid_request_inprocess
+    global IS_MULTIPROC, pyramid_request, pyramid_request_ingress
 
     atexit.register(mark_process_dead, os.getpid())
     settings = config.registry.settings
@@ -25,21 +25,21 @@ def includeme(config):
         'prometheus.use_multiproc', 'false'))
 
     kwargs = {
-        'labelnames': ['method', 'path_info'],
+        'labelnames': ['method', 'path_info_pattern'],
     }
 
     if IS_MULTIPROC:
         kwargs['multiprocess_mode'] = settings.get(
-            'prometheus.pyramid_inprogress_requests.multiprocess_mode',
+            'prometheus.pyramid_request_ingress.multiprocess_mode',
             'livesum')
 
-    pyramid_request_inprocess = Gauge(
-        'pyramid_inprogress_requests',
+    pyramid_request_ingress = Gauge(
+        'pyramid_request_ingress',
         'Number of requests currrently processed',
         **kwargs)
 
     kwargs = {
-        'labelnames': ['method', 'status', 'path_info']
+        'labelnames': ['method', 'status', 'path_info_pattern']
     }
     if 'prometheus.pyramid_request.buckets' in settings:
         buckets = settings.get('prometheus.pyramid_request.buckets')
