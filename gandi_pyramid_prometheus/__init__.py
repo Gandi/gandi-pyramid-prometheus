@@ -5,3 +5,4 @@ __version__ = '0.1'
 
 def includeme(config):
     config.include('.prometheus')
+    config.include('.view')
