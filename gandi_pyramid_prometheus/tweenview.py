@@ -4,14 +4,20 @@ Register a pyramid tweenview that inject prometheus metrics
 from __future__ import absolute_import, unicode_literals
 
 from time import time
-from pyramid.tweens import EXCVIEW, INGRESS
+from pyramid.tweens import EXCVIEW
+from pyramid.interfaces import IRoutesMapper
 
 from . import prometheus as prom
 
 
 def get_pattern(request):
+    path_info_pattern = ''
     if request.matched_route is None:
-        path_info_pattern = ''
+        routes_mapper = request.registry.queryUtility(IRoutesMapper)
+        if routes_mapper:
+            info = routes_mapper(request)
+            if info and info['route']:
+                path_info_pattern = info['route'].pattern
     else:
         path_info_pattern = request.matched_route.pattern
     return path_info_pattern
@@ -20,6 +26,13 @@ def get_pattern(request):
 def histo_tween_factory(handler, registry):
 
     def tween(request):
+
+        if prom.pyramid_request_ingress:
+            gauge_labels = {
+                'method': request.method,
+                'path_info_pattern': get_pattern(request),
+            }
+            prom.pyramid_request_ingress.labels(**gauge_labels).inc()
 
         start = time()
         status = '500'
@@ -35,32 +48,12 @@ def histo_tween_factory(handler, registry):
                     path_info_pattern=get_pattern(request),
                     status=status,
                     ).observe(duration)
-
-    return tween
-
-
-def ingress_tween_factory(handler, registry):
-    def tween(request):
-        labels = {
-            'method': request.method,
-            'path_info_pattern': get_pattern(request),
-        }
-
-        if prom.pyramid_request_ingress:
-            prom.pyramid_request_ingress.labels(**labels).inc()
-        try:
-            response = handler(request)
-            status = str(response.status_int)
-            return response
-        finally:
             if prom.pyramid_request_ingress:
-                prom.pyramid_request_ingress.labels(**labels).dec()
+                prom.pyramid_request_ingress.labels(**gauge_labels).dec()
+
     return tween
 
 
 def includeme(config):
     config.add_tween(
         'gandi_pyramid_prometheus.tweenview.histo_tween_factory', over=EXCVIEW)
-    config.add_tween(
-        'gandi_pyramid_prometheus.tweenview.ingress_tween_factory',
-        under=INGRESS)

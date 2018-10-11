@@ -34,19 +34,10 @@ class PromTestCase(TestCase):
              'status': '200'},)
         self.assertEqual(inf, 1.)
 
-
-    def test_ingress_tween_factory(self):
-        prom.includeme(self.conf)
-
-        tween = tweenview.ingress_tween_factory(view, self.conf.registry)
-
-        req = testing.DummyRequest(matched_route=DummyRoute())
-        tween(req)
-
-        inf = REGISTRY.get_sample_value(
+        ingress = REGISTRY.get_sample_value(
             'pyramid_request_ingress',
             {'path_info_pattern': '/bars/{id}',
              'method': 'GET',
              },)
 
-        self.assertEqual(inf, 0.)
+        self.assertEqual(ingress, 0.)
