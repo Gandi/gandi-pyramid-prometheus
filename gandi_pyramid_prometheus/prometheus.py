@@ -18,7 +18,6 @@ def includeme(config):
 
     global IS_MULTIPROC, pyramid_request, pyramid_request_ingress
 
-    atexit.register(mark_process_dead, os.getpid())
     settings = config.registry.settings
 
     IS_MULTIPROC = asbool(config.registry.settings.get(
@@ -29,6 +28,7 @@ def includeme(config):
     }
 
     if IS_MULTIPROC:
+        atexit.register(mark_process_dead, os.getpid())
         kwargs['multiprocess_mode'] = settings.get(
             'prometheus.pyramid_request_ingress.multiprocess_mode',
             'livesum')
