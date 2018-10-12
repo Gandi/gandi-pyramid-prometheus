@@ -31,8 +31,10 @@ def get_metrics(request):
 
 def includeme(config):
     """Configure the /metrics view"""
+    metric_path_info = config.registry.settings.get(
+        'prometheus.metric_path_info', '/metrics')
 
-    config.add_route('prometheus_metric', '/metrics')
+    config.add_route('prometheus_metric', metric_path_info)
     config.add_view(
         get_metrics,
         route_name='prometheus_metric',

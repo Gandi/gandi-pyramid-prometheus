@@ -17,6 +17,7 @@ def get_app():
     from pyramid.response import Response
 
     settings = {
+        'prometheus.metric_path_info': '/obfuscated',
         'prometheus.pyramid_request.buckets': '0.001, 0.1'
     }
 
@@ -49,13 +50,12 @@ class IntegrationTestCase(TestCase):
             REGISTRY.unregister(prom.pyramid_request_ingress)
             prom.pyramid_request_ingress = None
 
-
     def test_integration(self):
         self.app.get('/hello/World')
         self.app.post('/hello/Chris')
         self.app.post('/hello/McDonough')
 
-        resp = self.app.get('/metrics')
+        resp = self.app.get('/obfuscated')
 
         metrics = {
             metric.name: metric
@@ -70,15 +70,15 @@ class IntegrationTestCase(TestCase):
 
         self.assertEqual(
             pyramid_request_ingress[('GET', '/hello/{name}')],
-            0.0, # The /metrics calls done during the tests is here
+            0.0, # The metrics calls done during the tests is here
             )
         self.assertEqual(
             pyramid_request_ingress[('POST', '/hello/{name}')],
             0.0,
             )
         self.assertEqual(
-            pyramid_request_ingress[('GET', '/metrics')],
-            1.0, # The /metrics calls done during the tests is here
+            pyramid_request_ingress[('GET', '/obfuscated')],
+            1.0, # The metrics calls done during the tests is here
             )
 
         request_bucket = {
@@ -118,14 +118,14 @@ class IntegrationTestCase(TestCase):
         )
 
         self.assertNotIn(
-            (u'GET', u'/metrics', u'200', u'+Inf'),
+            (u'GET', u'/obfuscated', u'200', u'+Inf'),
             request_bucket,
-            "The /metrics route has not been call before the capture, "
+            "The metrics route has not been call before the capture, "
             "and should bot be present"
         )
 
         # rescrape to get the previous metrics happen
-        resp = self.app.get('/metrics')
+        resp = self.app.get('/obfuscated')
 
         metrics = {
             metric.name: metric
@@ -141,7 +141,8 @@ class IntegrationTestCase(TestCase):
             if sample.name == 'pyramid_request_bucket'
         }
 
-        self.assertIn((u'GET', u'/metrics', u'200', u'+Inf'), request_bucket)
+        self.assertIn(
+            (u'GET', u'/obfuscated', u'200', u'+Inf'), request_bucket)
 
         request_count = {
             (sample.labels['method'],
@@ -155,7 +156,6 @@ class IntegrationTestCase(TestCase):
             request_count,
             {(u'POST', u'/hello/{name}', u'200'): 2.0,
              (u'GET', u'/hello/{name}', u'200'): 1.0,
-             (u'GET', u'/metrics', u'200'): 1.0,
+             (u'GET', u'/obfuscated', u'200'): 1.0,
              }
         )
-         
