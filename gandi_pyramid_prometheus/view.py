@@ -36,5 +36,5 @@ def includeme(config):
     config.add_view(
         get_metrics,
         route_name='prometheus_metric',
-        permission=NO_PERMISSION_REQUIRED,  # XXX FIXME
+        permission='prometheus:metric:read',  # XXX FIXME
         )
