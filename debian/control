@@ -1,0 +1,16 @@
+Source: gandi-pyramid-prometheus
+Priority: optional
+Section: python
+Maintainer: Guillaume Gauvrit <guillaume@gandi.net>
+Build-Depends: debhelper (>= 8),
+ python (>= 2.7)
+Build-Depends-Indep: python-setuptools, python-babel
+Standards-Version: 3.9.1
+X-Python-Version: >= 2.7
+
+Package: python-gandi-pyramid-prometheus
+Architecture: all
+Depends: ${misc:Depends}, ${python:Depends}
+Provides: ${python:Provides}
+Description: Binding for prometheus in a pyramid web application
+  https://github.com/Gandi/gandi-pyramid-prometheus
