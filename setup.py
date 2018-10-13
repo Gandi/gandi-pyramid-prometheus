@@ -21,7 +21,7 @@ requires = [
 
 extras_require = {
     'doc': [],   # TODO
-    'test': ['webtest'],
+    'test': ['webtest', 'zope.interface'],
 }
 
 setup(name=name,
