@@ -1,0 +1,5 @@
+gandi-pyramid-prometheus (0.1) unstable; urgency=low
+
+  * Initial release.
+
+ -- Guillaume Gauvrit <guillaume@gandi.net>  Wed, 10 Oct 2018 10:25:00 +0200
