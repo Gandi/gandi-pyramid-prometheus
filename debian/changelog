@@ -1,3 +1,9 @@
+gandi-pyramid-prometheus (0.4) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Guillaume Gauvrit <guillaume@gandi.net>  Sat, 13 Oct 2018 22:01:25 +0200
+
 gandi-pyramid-prometheus (0.3) unstable; urgency=low
 
   * New upstream release.

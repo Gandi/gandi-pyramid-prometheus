@@ -1,6 +1,11 @@
 CHANGELOG
 =========
 
+0.4 2018-10-13
+--------------
+
+ * Rename setting `prometheus.metric_path_info` to `prometheus.metrics_path_info`
+
 0.3 2018-10-13
 --------------
 
