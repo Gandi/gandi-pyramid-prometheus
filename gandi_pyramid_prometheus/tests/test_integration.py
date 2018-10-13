@@ -215,7 +215,7 @@ class SecurityTestCase(TestCase):
     def setUp(self):
         settings = {
             'pyramid.debug_authorization': 'true',
-            'prometheus.metric_path_info': '/obfuscated',
+            'prometheus.metrics_path_info': '/obfuscated',
             'prometheus.pyramid_request.buckets': '0.001, 0.1'
         }
         app = get_app(settings, with_acl=True)
