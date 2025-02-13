@@ -18,6 +18,11 @@ def includeme(config):
 
     global IS_MULTIPROC, pyramid_request, pyramid_request_ingress
 
+    # Early return in case this module is included more than once,
+    # otherwise registration of the metrics will fail with the prometheus lib
+    if pyramid_request is not None:
+        return
+
     settings = config.registry.settings
 
     IS_MULTIPROC = asbool(config.registry.settings.get(
