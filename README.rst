@@ -1,8 +1,9 @@
 Gandi Pyramid Prometheus
 ========================
 
-.. image:: https://travis-ci.org/Gandi/gandi-pyramid-prometheus.svg?branch=master
-    :target: https://travis-ci.org/Gandi/gandi-pyramid-prometheus
+
+.. image:: https://github.com/gandi/gandi-pyramid-prometheus/actions/workflows/tests.yml/badge.svg
+   :target: https://github.com/gandi/gandi-pyramid-prometheus/actions/workflows/tests.yml
+   :alt: Continuous Integration
 
 A prometheus client library for general metrics from pyramid.
-
