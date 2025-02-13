@@ -23,11 +23,10 @@ includes = ["src", "CHANGELOG.rst"]
 excludes = ["tests"]
 
 [project.urls]
-Homepage = "https://github.com/mardiros/pyramid-blacksmith"
-Documentation = "https://mardiros.github.io/pyramid-blacksmith"
-Repository = "https://github.com/mardiros/pyramid-blacksmith.git"
-Issues = "https://github.com/mardiros/pyramid-blacksmith/issues"
-Changelog = "https://mardiros.github.io/pyramid-blacksmith/user/changelog.html"
+Homepage = "https://github.com/gandi/gandi-pyramid-prometheus"
+Repository = "https://github.com/gandi/gandi-pyramid-prometheus.git"
+Issues = "https://github.com/gandi/gandi-pyramid-prometheus/issues"
+Changelog = "https://github.com/Gandi/gandi-pyramid-prometheus/blob/master/CHANGES.rst"
 
 
 [dependency-groups]
