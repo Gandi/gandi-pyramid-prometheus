@@ -1,6 +1,5 @@
 
 from gandi_pyramid_prometheus import prometheus as prom
-from prometheus_client import Gauge, Histogram
 
 from .base import TestCase
 

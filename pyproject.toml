@@ -1,0 +1,61 @@
+[project]
+authors = [{ name = "Gandi", email = "feedback@gandi.net" }]
+classifiers = [
+    "Framework :: Pyramid",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD-derived",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: System :: Networking",
+]
+description = "Pyramid Plugin for prometheus integration on multiprocess wsgi server"
+license = { text = "BSD-derived (http://www.repoze.org/LICENSE.txt)" }
+name = "gandi-pyramid-prometheus"
+readme = "README.rst"
+requires-python = ">=3.7"
+version = "0.6.0"
+
+dependencies = ["pyramid >1.10,<3", "prometheus-client >= 0.17,<1"]
+
+[tool.pdm.build]
+includes = ["src", "CHANGELOG.rst"]
+excludes = ["tests"]
+
+[project.urls]
+Homepage = "https://github.com/mardiros/pyramid-blacksmith"
+Documentation = "https://mardiros.github.io/pyramid-blacksmith"
+Repository = "https://github.com/mardiros/pyramid-blacksmith.git"
+Issues = "https://github.com/mardiros/pyramid-blacksmith/issues"
+Changelog = "https://mardiros.github.io/pyramid-blacksmith/user/changelog.html"
+
+
+[dependency-groups]
+dev = ["pytest", "webtest", "zope.interface"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py37"
+
+[tool.ruff.lint]
+select = [
+    "B",   # bug bear security warning
+    "I",   # isort import order
+    "F",   # pyflakes
+    "UP",  # alter when better syntax is available
+    "RUF", #  the ruff developper's own rules
+]
+ignore = ["RUF022"]
+
+
+[tool.coverage.report]
+exclude_lines = [
+    "if TYPE_CHECKING:",
+    "except ImportError:",
+    "\\s+\\.\\.\\.$",
+    "# coverage: ignore",
+]
+
+[build-system]
+requires = ["pdm-backend"]
+build-backend = "pdm.backend"
