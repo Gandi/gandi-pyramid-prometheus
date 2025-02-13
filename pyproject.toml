@@ -37,6 +37,9 @@ dev = [
     "zope.interface",
 ]
 
+[tool.uv]
+default-groups = []
+
 [tool.ruff]
 line-length = 88
 target-version = "py37"
