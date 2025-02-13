@@ -7,7 +7,7 @@ header = (
     f"{gandi_pyramid_prometheus.__version__} - "
     f"Released on {datetime.datetime.now().date().isoformat()}"
 )
-with open("CHANGELOG.rst.new", "w") as changelog:
+with open("CHANGES.rst.new", "w") as changelog:
     changelog.write(header)
     changelog.write("\n")
     changelog.write("-" * len(header))

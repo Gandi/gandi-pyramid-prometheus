@@ -35,13 +35,13 @@ release major_minor_patch: test && changelog
 
 changelog:
     uv run python bin/write_changelog.py
-    cat CHANGELOG.rst >> CHANGELOG.rst.new
-    rm CHANGELOG.rst
-    mv CHANGELOG.rst.new CHANGELOG.rst
-    $EDITOR CHANGELOG.rst
+    cat CHANGES.rst >> CHANGES.rst.new
+    rm CHANGES.rst
+    mv CHANGES.rst.new CHANGES.rst
+    $EDITOR CHANGES.rst
 
 publish:
-    git commit -am "Release $(uv run scripts/get_version.py)"
-    git tag "v$(uv run scripts/get_version.py)"
-    git push origin "v$(uv run scripts/get_version.py)"
+    git commit -am "Release $(uv run bin/get_version.py)"
+    git tag "v$(uv run bin/get_version.py)"
+    git push origin "v$(uv run bin/get_version.py)"
     git push origin main
