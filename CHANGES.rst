@@ -1,3 +1,7 @@
+0.6.1 - Released on 2025-02-13
+------------------------------
+* Fix Github Action 
+
 0.6.0 - Released on 2025-02-13
 ------------------------------
 * Drop python 2 support
