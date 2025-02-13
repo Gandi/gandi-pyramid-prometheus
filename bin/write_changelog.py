@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 import datetime
 
-import pyramid_blacksmith
+import gandi_pyramid_prometheus
 
 header = (
-    f"{pyramid_blacksmith.__version__} - "
+    f"{gandi_pyramid_prometheus.__version__} - "
     f"Released on {datetime.datetime.now().date().isoformat()}"
 )
 with open("CHANGELOG.rst.new", "w") as changelog:

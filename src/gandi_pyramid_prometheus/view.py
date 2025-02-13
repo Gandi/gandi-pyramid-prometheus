@@ -1,13 +1,13 @@
-""" Generate a prometheus view to expose the metrics """
-from __future__ import absolute_import, unicode_literals
-
-from pyramid.security import NO_PERMISSION_REQUIRED
-from pyramid.response import Response
+"""Generate a prometheus view to expose the metrics"""
 
 from prometheus_client import (
-    CollectorRegistry, generate_latest, CONTENT_TYPE_LATEST, REGISTRY
-    )
+    CONTENT_TYPE_LATEST,
+    REGISTRY,
+    CollectorRegistry,
+    generate_latest,
+)
 from prometheus_client.multiprocess import MultiProcessCollector
+from pyramid.response import Response
 
 from . import prometheus as prom
 
@@ -24,7 +24,7 @@ def get_metrics(request):
     request.response.content_type = CONTENT_TYPE_LATEST
     resp = Response(
         content_type=CONTENT_TYPE_LATEST,
-        )
+    )
     resp.body = generate_latest(registry)
     return resp
 
@@ -32,11 +32,12 @@ def get_metrics(request):
 def includeme(config):
     """Configure the /metrics view"""
     metrics_path_info = config.registry.settings.get(
-        'prometheus.metrics_path_info', '/metrics')
+        "prometheus.metrics_path_info", "/metrics"
+    )
 
-    config.add_route('prometheus_metric', metrics_path_info)
+    config.add_route("prometheus_metric", metrics_path_info)
     config.add_view(
         get_metrics,
-        route_name='prometheus_metric',
-        permission='prometheus:metric:read',
-        )
+        route_name="prometheus_metric",
+        permission="prometheus:metric:read",
+    )

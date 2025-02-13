@@ -1,6 +1,6 @@
+from prometheus_client import REGISTRY
 from pyramid import testing
 from pyramid.response import Response
-from prometheus_client import REGISTRY
 
 from gandi_pyramid_prometheus import prometheus as prom
 from gandi_pyramid_prometheus import tweenview
@@ -8,8 +8,8 @@ from gandi_pyramid_prometheus import tweenview
 from .base import TestCase
 
 
-class DummyRoute(object):
-    pattern = '/bars/{id}'
+class DummyRoute:
+    pattern = "/bars/{id}"
 
 
 def view(req):
@@ -17,7 +17,6 @@ def view(req):
 
 
 class PromTestCase(TestCase):
-
     def test_histo_tween_factory(self):
         prom.includeme(self.conf)
 
@@ -27,17 +26,22 @@ class PromTestCase(TestCase):
         tween(req)
 
         inf = REGISTRY.get_sample_value(
-            'pyramid_request_bucket',
-            {'path_info_pattern': '/bars/{id}',
-             'method': 'GET',
-             'le': '+Inf',
-             'status': '200'},)
-        self.assertEqual(inf, 1.)
+            "pyramid_request_bucket",
+            {
+                "path_info_pattern": "/bars/{id}",
+                "method": "GET",
+                "le": "+Inf",
+                "status": "200",
+            },
+        )
+        self.assertEqual(inf, 1.0)
 
         ingress = REGISTRY.get_sample_value(
-            'pyramid_request_ingress',
-            {'path_info_pattern': '/bars/{id}',
-             'method': 'GET',
-             },)
+            "pyramid_request_ingress",
+            {
+                "path_info_pattern": "/bars/{id}",
+                "method": "GET",
+            },
+        )
 
-        self.assertEqual(ingress, 0.)
+        self.assertEqual(ingress, 0.0)

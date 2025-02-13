@@ -1,6 +1,6 @@
 from importlib import metadata
 
-__version__ = metadata.version("pyramid_blacksmith")
+__version__ = metadata.version("gandi_pyramid_prometheus")
 
 
 def includeme(config):

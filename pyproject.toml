@@ -45,7 +45,7 @@ select = [
     "UP",  # alter when better syntax is available
     "RUF", #  the ruff developper's own rules
 ]
-ignore = ["RUF022"]
+ignore = ["RUF012", "RUF022"]
 
 
 [tool.coverage.report]

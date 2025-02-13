@@ -1,13 +1,10 @@
-
 from gandi_pyramid_prometheus import prometheus as prom
 
 from .base import TestCase
 
 
 class PromTestCase(TestCase):
-
     def test_includeme(self):
-
         self.assertIsNone(prom.pyramid_request)
         self.assertIsNone(prom.pyramid_request_ingress)
 
@@ -16,5 +13,5 @@ class PromTestCase(TestCase):
         self.assertIsNotNone(prom.pyramid_request)
         self.assertIsNotNone(prom.pyramid_request_ingress)
 
-        self.assertEqual(prom.pyramid_request._type, 'histogram')
-        self.assertIsNotNone(prom.pyramid_request_ingress._type, 'gauge')
+        self.assertEqual(prom.pyramid_request._type, "histogram")
+        self.assertIsNotNone(prom.pyramid_request_ingress._type, "gauge")
