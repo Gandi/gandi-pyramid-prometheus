@@ -30,7 +30,12 @@ Changelog = "https://github.com/Gandi/gandi-pyramid-prometheus/blob/master/CHANG
 
 
 [dependency-groups]
-dev = ["pytest", "webtest", "zope.interface"]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "webtest",
+    "zope.interface",
+]
 
 [tool.ruff]
 line-length = 88

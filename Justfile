@@ -4,6 +4,13 @@ default_test_suite := 'tests'
 install:
     uv sync --group dev
 
+upgrade: && update
+    uv lock --upgrade
+
+update:
+    #!/bin/bash
+    uv sync --group dev
+    uv export --no-hashes > .gitlab/ci/requirements.txt
 
 test: lint unittest
 
