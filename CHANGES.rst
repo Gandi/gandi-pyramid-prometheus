@@ -1,5 +1,9 @@
-CHANGELOG
-=========
+0.6.0 - Released on 2025-02-13
+------------------------------
+* Drop python 2 support
+* Drop python 3.5, 3.6 support
+* Keep support of python 3.7 and python 3.8 even if tests does not run on the CI on those version
+* Remove debian packaging recipe based on python 2
 
 0.5 2018-10-15
 --------------
