@@ -3,7 +3,6 @@ authors = [{ name = "Gandi", email = "feedback@gandi.net" }]
 classifiers = [
     "Framework :: Pyramid",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: BSD-derived",
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries",
