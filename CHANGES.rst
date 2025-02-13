@@ -1,3 +1,7 @@
+0.6.2 - Released on 2025-02-13
+------------------------------
+* Fix Github Action to publish to PyPI 
+
 0.6.1 - Released on 2025-02-13
 ------------------------------
 * Fix Github Action 
