@@ -1,3 +1,7 @@
+0.6.3 - Released on 2025-02-14
+------------------------------
+* Fix python 3.7 compat 
+
 0.6.2 - Released on 2025-02-13
 ------------------------------
 * Fix Github Action to publish to PyPI 
