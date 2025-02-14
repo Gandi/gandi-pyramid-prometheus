@@ -1,6 +1,14 @@
-from importlib import metadata
+try:
+    from importlib.metadata import version
+except ImportError:
+    # python 3.7
+    import pkg_resources
 
-__version__ = metadata.version("gandi_pyramid_prometheus")
+    def version(distribution_name: str):
+        return pkg_resources.get_distribution(distribution_name).version
+
+
+__version__ = version("gandi_pyramid_prometheus")
 
 
 def includeme(config):
